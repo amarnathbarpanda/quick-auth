@@ -1,0 +1,73 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+}
+
+html {
+    font-size: 62.5%;
+}
+
+.container {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f0f2f4;
+}
+
+.form {
+    /* border: 1px solid green; */
+    width: 30rem;
+    height: 20rem;
+    border-radius: 25px;
+    background: #f0f2f4;
+    box-shadow: 5px 5px 10px #cccecf,
+        -5px -5px 10px #ffffff;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: column;
+}
+
+.form a {
+    text-decoration: none;
+    width: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.form a div {
+    width: 100%;
+    font-size: 1.6rem;
+    text-align: center;
+    box-shadow: 5px 5px 10px #cccecf,
+            -5px -5px 10px #ffffff;
+}
+
+#signup {
+    background: orangered;
+    color: white;
+    padding: 1rem;
+    border-radius: 10px;
+}
+
+#signup:hover {
+    background: rgb(221, 59, 0);
+}
+
+#signin {
+    background: green;
+    color: white;
+    padding: 1rem;
+    border-radius: 10px;
+}
+
+#signin:hover {
+    background: rgb(3, 92, 3);
+}
