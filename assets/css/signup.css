@@ -22,7 +22,7 @@ html {
 .form {
     /* border: 1px solid green; */
     width: 40rem;
-    height: 50rem;
+    height: 55rem;
     border-radius: 25px;
     background: #f0f2f4;
     box-shadow: 5px 5px 10px #cccecf,
@@ -34,7 +34,9 @@ html {
     flex-direction: column;
     margin-top: 5rem;
 }
-
+.alert{
+    font-size: 1.4rem;
+}
 .input {
     width: 80%;
     padding: 1rem;

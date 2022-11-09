@@ -1,10 +1,11 @@
+const csurf = require('csurf');
 const express = require('express');
 const app = express();
-
+const expressSession = require('express-session')
 
 const db = require('./config/mongoose');
 
-const port  = 8000;
+const port  = process.env.PORT || 8000;
 
 //to access static files
 app.use(express.static('./assets'));
@@ -18,6 +19,15 @@ app.set('layout extractScripts', true);
 //set up the view engine
 app.set('view engine', 'ejs');
 app.set('views', './views');
+
+// settiing up body parser
+app.use(express.urlencoded({extended: true}));
+
+app.use(expressSession({
+    secret: 'amar2324'
+}));
+
+app.use(csurf());
 
 app.use('/', require('./routes'));
 
