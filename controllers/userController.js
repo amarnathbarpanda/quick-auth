@@ -1,12 +1,32 @@
 const User = require("../models/User");
 const bcrypt = require('bcryptjs');
+const passport = require('passport');
+require('./passportLocal')(passport);
+
+module.exports.checkAuth = (req, res, next)=>{
+    if(req.isAuthenticated()){
+        res.set('Cache-Control', 'no-cache, private, no-store,must-revalidate, post-check=0, pre-check=0')
+        next();
+    }else{
+        res.redirect('/');
+    }
+}
+
 
 module.exports.homePage = (req, res) => {
-    return res.render('index');
+    if(req.isAuthenticated()){
+        return res.redirect('/profile');
+    }else{
+        return res.render('index', {logged: false});
+    }
 }
 
 module.exports.signUpPage = (req, res) => {
-    return res.render('signup', {csrfToken: req.csrfToken()});
+    if (req.isAuthenticated()) {
+        return res.redirect('/profile');
+    } else {
+        return res.render('signup', {csrfToken: req.csrfToken()});
+    }
 };
 
 module.exports.createUser = async (req, res) =>{
@@ -57,9 +77,31 @@ module.exports.createUser = async (req, res) =>{
 }
 
 module.exports.signInPage = (req, res) => {
-    return res.render('signin');
+    if (req.isAuthenticated()) {
+        return res.redirect('/profile');
+    } else {
+        return res.render('signin', { csrfToken: req.csrfToken() });
+    }
 };
 
+module.exports.signinUser =  (req, res, next) =>{
+    passport.authenticate( 'local', {
+        failureRedirect: '/signin',
+        successRedirect: '/profile',
+        failureFlash: true,
+    })(req, res, next);
+}
+
 module.exports.profilePage = (req, res) => {
-    return res.render('profile');
+
+    return res.render('profile', {username: req.user.username, email: req.user.email});
 };
+
+module.exports.logout = (req, res) =>{
+    req.logout(function (err) {
+        if (err) { return next(err); }
+        req.session.destroy(function(err){
+            res.redirect('/');
+        })
+    });
+}

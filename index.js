@@ -36,7 +36,7 @@ app.use(expressSession({
     // this forces the sessions to be saved back to our store
     saveUninitialized: false,
     cookie: {
-        maxAge: (1000 * 60 * 100)
+        maxAge: (1000 * 60 * 60)
     },
     store: new MongoStore({
         // mongooseConnection: db, this won't work 
