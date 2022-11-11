@@ -1,3 +1,4 @@
+require('dotenv').config();
 const csurf = require('csurf');
 const express = require('express');
 const app = express();
@@ -29,6 +30,7 @@ app.use(express.urlencoded({extended: true}));
 
 app.use(cookieParser('amar2324'))
 
+// session
 app.use(expressSession({
     name: 'quick-auth',
     secret: 'amar2324',
@@ -50,16 +52,22 @@ app.use(expressSession({
 
 app.use(csurf());
 
+// initializing the passport and passport session
 app.use(passport.initialize());
 app.use(passport.session());
 
+
+// connection the flash
 app.use(flash());
 
 app.use((req, res, next)=>{
+    res.locals.success_message = req.flash('success_message');
+    res.locals.error_message = req.flash('error_message');
     res.locals.error = req.flash('error');
     next();
 });
 
+// initialize routes
 app.use('/', require('./routes'));
 
 app.listen(port, (err) => {

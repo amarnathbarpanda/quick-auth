@@ -23,6 +23,14 @@
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             <% } %>
+            
+            <% if(error_message != '' ){ %>
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong> Error </strong>
+                    <%= error_message %>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            <% } %>
 
             <input type="hidden" name="_csrf" value="<%= csrfToken %>">
             <input type="email" name="email" id="" placeholder="Email" class="input">
@@ -30,9 +38,10 @@
 
             <input type="submit" value="Sign In" id="signin" class="input">
 
-            <a href="http://" class="input google__btn" >Continue With Google</a>
+            <a href="/google" class="input google__btn" >Continue With Google</a>
 
             <span id="signup__link">New User ? Sign Up <a href="/signup">Here</a></span>
+            <span id="signup__link">Forgot password ? <a href="/user/forgot-password">Here</a></span>
         </form>
     </div>
 

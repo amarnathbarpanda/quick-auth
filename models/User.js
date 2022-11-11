@@ -13,7 +13,7 @@ const userSchema = new mongoose.Schema({
         type: String
         // it is not require as the user signs in using Google then no need to store password 
     },
-    isVarified: {
+    isVerified: {
         type: Boolean,
         default: false
     },
